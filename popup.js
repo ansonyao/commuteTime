@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var workInput = document.getElementById('work');
   workInput.oninput = workInputHandler;
   workInput.onpropertychange = workInput.oninput;
+
+  var radios = document.getElementsByName('commutetool');
+  for (var i = 0, length = radios.length; i < length; i++) {
+      radios[i].onclick = commuteToolInputHandler;
+  }
 });
 
 
@@ -27,6 +32,17 @@ function workInputHandler() {
     });
 };
 
+function commuteToolInputHandler() {
+    var radios = document.getElementsByName('commutetool');
+    for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+        chrome.storage.sync.set({'commutetool': radios[i].value}, function () {
+        });
+        break;
+      }
+    }
+};
+
 function loadStorage() {
   chrome.storage.sync.get('home', function(result) {
     var homeInput = document.getElementById('home');
@@ -36,5 +52,17 @@ function loadStorage() {
   chrome.storage.sync.get('work', function(result) {
     var workInput = document.getElementById('work');
     workInput.value = result.work;
+  });
+
+  chrome.storage.sync.get('commutetool', function(result) {
+    console.log(result.commutetool);
+    var radios = document.getElementsByName('commutetool');
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].value === result.commutetool) {
+          radios[i].checked = true;
+        } else {
+          radios[i].checked = false;
+        }
+    }
   });
 };
