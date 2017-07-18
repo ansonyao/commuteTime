@@ -1,12 +1,20 @@
 function getDirectionFromHome(info) {
   chrome.storage.sync.get('home', function(result) {
-    getDirection(result.home, info.selectionText);
+    if (result.home != null && result.home.length > 0) {
+      getDirection(result.home, info.selectionText);
+    } else {
+      alert("You have not set home address yet. You can click on the How Far extension to set it.");
+    }
   });
 };
 
 function getDirectionFromWork(info) {
   chrome.storage.sync.get('work', function(result) {
-    getDirection(info.selectionText, result.work);
+    if (result.work != null && result.work.length > 0) {
+      getDirection(info.selectionText, result.work);
+    } else {
+      alert("You have not set work address yet. You can click on the How Far extension to set it.");
+    }
   });
 };
 

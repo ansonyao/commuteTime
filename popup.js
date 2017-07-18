@@ -45,13 +45,17 @@ function commuteToolInputHandler() {
 
 function loadStorage() {
   chrome.storage.sync.get('home', function(result) {
-    var homeInput = document.getElementById('home');
-    homeInput.value = result.home;
+    if(result.home) {
+      var homeInput = document.getElementById('home');
+      homeInput.value = result.home;
+    }
   });
 
   chrome.storage.sync.get('work', function(result) {
-    var workInput = document.getElementById('work');
-    workInput.value = result.work;
+    if(result.work) {
+      var workInput = document.getElementById('work');
+      workInput.value = result.work;
+    }
   });
 
   chrome.storage.sync.get('commutetool', function(result) {
