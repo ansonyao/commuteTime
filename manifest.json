@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
 
-  "name": "Commute",
-  "description": "This extension shows a Google Image search result for the current page",
+  "name": "How Far",
+  "description": "Right click to check how far is it!",
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "icon_48.png",
     "default_popup": "popup.html"
   },
   "permissions": [
@@ -17,5 +17,8 @@
   ],
   "background": { 
       "scripts": ["script.js"]
-  }
+  },
+  "icons": { "16": "icon_16.png",
+           "48": "icon_48.png",
+          "128": "icon_128.png" }
 }
